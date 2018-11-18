@@ -1,3 +1,4 @@
+//check to see if the task data entered is valid
 const handleTask = (e) => {
     e.preventDefault();
     $("#taskMessage").animate({width:'hide'},350);
@@ -13,6 +14,7 @@ const handleTask = (e) => {
     return false;
 };
 
+//check to see if the passwords entered are valid
 const handleChangePassword = (e) => {
     e.preventDefault();
     $("#taskMessage").animate({width:'hide'},350);
@@ -28,6 +30,7 @@ const handleChangePassword = (e) => {
     return false;
 };
 
+//create the form used for creating new tasks
 const TaskForm = (props) => {
     return (
         <form id="taskForm" name="taskForm"
@@ -49,6 +52,7 @@ const TaskForm = (props) => {
     );
 };
 
+//create the form used for editing tasks
 const EditTaskForm = (props) => {
     //console.dir(props);
     let date = new Date(props.tasks.dueDate);
@@ -76,6 +80,7 @@ const EditTaskForm = (props) => {
     );
 };
 
+//create a single task expanded menu
 const SingleTask = (props) => {
     let someDueDate = new Date(props.tasks.dueDate);
     let someCreatedDate = new Date(props.tasks.createdDate);
@@ -102,6 +107,7 @@ const SingleTask = (props) => {
     );
 };
 
+//generate the list of all user tasks
 const TaskList = function(props){
     if(props.tasks.length === 0){
         return (
@@ -142,6 +148,7 @@ const TaskList = function(props){
     );
 }
 
+//generate the password change form
 const ChangePassword = (props) => {
     return (
         <form id="changePasswordForm" name="changePasswordForm"
@@ -172,6 +179,7 @@ const ChangePassword = (props) => {
     );
 };
 
+//when a task is clicked, load new react page
 const onTaskClick = (doc) => {
     document.querySelector("#createNewTask").style.display = "none";
     document.querySelector("#backButton").style.display = "inline-block";
@@ -183,6 +191,7 @@ const onTaskClick = (doc) => {
     });
 };
 
+//when a task is selected to be edited, load new react page
 const onTaskEdit = (doc) => {
     document.querySelector("#createNewTask").style.display = "none";
     document.querySelector("#backButton").style.display = "inline-block";
@@ -193,10 +202,12 @@ const onTaskEdit = (doc) => {
     //sendAjax('POST','/editTask', `id=${doc._id}&_csrf=${document.querySelector('.hiddenCSRF').innerHTML}`, redirect);
 };
 
+//when a task is deleted, send post then redirect
 const onTaskDelete = (doc) => {
     sendAjax('POST','/deleteTask', `id=${doc._id}&_csrf=${document.querySelector('.hiddenCSRF').innerHTML}`, redirect);
 };
 
+//load all of the user tasks from the server
 const loadTasksFromServer = (csrf) => {
     document.querySelector("#backButton").style.display = "none";
     document.querySelector("#createNewTask").style.display = "inline-block";
@@ -207,6 +218,7 @@ const loadTasksFromServer = (csrf) => {
     });
 };
 
+//helper functions for loading react pages
 const createChangePasswordWindow = (csrf) => {
     ReactDOM.render(
         <ChangePassword csrf={csrf} />, 

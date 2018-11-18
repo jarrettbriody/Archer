@@ -10,6 +10,11 @@ const logout = (req, res) => {
   res.redirect('/');
 };
 
+/*
+when logging in check that all values exist,
+check if the user and pass are valid,
+set session account var, redirect
+*/
 const login = (request, response) => {
   const req = request;
   const res = response;
@@ -32,6 +37,10 @@ const login = (request, response) => {
   });
 };
 
+/*
+when signing up check that all values exist,
+create a new document with encrypted pass
+*/
 const signup = (request, response) => {
   const req = request;
   const res = response;
@@ -72,6 +81,11 @@ const signup = (request, response) => {
   });
 };
 
+/*
+when changing passwords check that all values exist,
+then check if the old password is correct,
+then update the document with the new password after encryption
+*/
 const changePassword = (request, response) => {
   const req = request;
   const res = response;

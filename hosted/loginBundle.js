@@ -1,5 +1,6 @@
 "use strict";
 
+//check for valid login values, send post
 var handleLogin = function handleLogin(e) {
     e.preventDefault();
     $("#taskMessage").animate({ width: 'hide' }, 350);
@@ -12,6 +13,7 @@ var handleLogin = function handleLogin(e) {
     return false;
 };
 
+//check for valid signup values, send post
 var handleSignup = function handleSignup(e) {
     e.preventDefault();
     $("#taskMessage").animate({ width: 'hide' }, 350);
@@ -27,6 +29,7 @@ var handleSignup = function handleSignup(e) {
     return false;
 };
 
+//create react page for login
 var LoginWindow = function LoginWindow(props) {
     return React.createElement(
         "form",
@@ -75,6 +78,7 @@ var LoginWindow = function LoginWindow(props) {
     );
 };
 
+//create react page for signup
 var SignupWindow = function SignupWindow(props) {
     return React.createElement(
         "form",
@@ -121,6 +125,7 @@ var SignupWindow = function SignupWindow(props) {
     );
 };
 
+//helper function for creating react pages
 var createLoginWindow = function createLoginWindow(csrf) {
     ReactDOM.render(React.createElement(LoginWindow, { csrf: csrf }), document.querySelector("#content"));
 };

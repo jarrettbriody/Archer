@@ -74,6 +74,7 @@ app.use((err, req, res, next) => {
   return false;
 });
 
+//rate limiter to limit spam requests
 const apiLimiter = rateLimit({
   windowMs: 15 * 1000,
   max: 1,

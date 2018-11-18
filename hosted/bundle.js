@@ -1,5 +1,6 @@
 "use strict";
 
+//check to see if the task data entered is valid
 var handleTask = function handleTask(e) {
     e.preventDefault();
     $("#taskMessage").animate({ width: 'hide' }, 350);
@@ -15,6 +16,7 @@ var handleTask = function handleTask(e) {
     return false;
 };
 
+//check to see if the passwords entered are valid
 var handleChangePassword = function handleChangePassword(e) {
     e.preventDefault();
     $("#taskMessage").animate({ width: 'hide' }, 350);
@@ -30,6 +32,7 @@ var handleChangePassword = function handleChangePassword(e) {
     return false;
 };
 
+//create the form used for creating new tasks
 var TaskForm = function TaskForm(props) {
     return React.createElement(
         "form",
@@ -71,6 +74,7 @@ var TaskForm = function TaskForm(props) {
     );
 };
 
+//create the form used for editing tasks
 var EditTaskForm = function EditTaskForm(props) {
     //console.dir(props);
     var date = new Date(props.tasks.dueDate);
@@ -118,6 +122,7 @@ var EditTaskForm = function EditTaskForm(props) {
     );
 };
 
+//create a single task expanded menu
 var SingleTask = function SingleTask(props) {
     var someDueDate = new Date(props.tasks.dueDate);
     var someCreatedDate = new Date(props.tasks.createdDate);
@@ -200,6 +205,7 @@ var SingleTask = function SingleTask(props) {
     );
 };
 
+//generate the list of all user tasks
 var TaskList = function TaskList(props) {
     if (props.tasks.length === 0) {
         return React.createElement(
@@ -290,6 +296,7 @@ var TaskList = function TaskList(props) {
     );
 };
 
+//generate the password change form
 var ChangePassword = function ChangePassword(props) {
     return React.createElement(
         "form",
@@ -348,6 +355,7 @@ var ChangePassword = function ChangePassword(props) {
     );
 };
 
+//when a task is clicked, load new react page
 var onTaskClick = function onTaskClick(doc) {
     document.querySelector("#createNewTask").style.display = "none";
     document.querySelector("#backButton").style.display = "inline-block";
@@ -357,6 +365,7 @@ var onTaskClick = function onTaskClick(doc) {
     });
 };
 
+//when a task is selected to be edited, load new react page
 var onTaskEdit = function onTaskEdit(doc) {
     document.querySelector("#createNewTask").style.display = "none";
     document.querySelector("#backButton").style.display = "inline-block";
@@ -365,10 +374,12 @@ var onTaskEdit = function onTaskEdit(doc) {
     //sendAjax('POST','/editTask', `id=${doc._id}&_csrf=${document.querySelector('.hiddenCSRF').innerHTML}`, redirect);
 };
 
+//when a task is deleted, send post then redirect
 var onTaskDelete = function onTaskDelete(doc) {
     sendAjax('POST', '/deleteTask', "id=" + doc._id + "&_csrf=" + document.querySelector('.hiddenCSRF').innerHTML, redirect);
 };
 
+//load all of the user tasks from the server
 var loadTasksFromServer = function loadTasksFromServer(csrf) {
     document.querySelector("#backButton").style.display = "none";
     document.querySelector("#createNewTask").style.display = "inline-block";
@@ -377,6 +388,7 @@ var loadTasksFromServer = function loadTasksFromServer(csrf) {
     });
 };
 
+//helper functions for loading react pages
 var createChangePasswordWindow = function createChangePasswordWindow(csrf) {
     ReactDOM.render(React.createElement(ChangePassword, { csrf: csrf }), document.querySelector("#tasks"));
 };

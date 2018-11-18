@@ -14,6 +14,9 @@ const createTaskListPage = (req, res) => {
 
 //const createTaskPage = (req, res) => res.render('createTask', { csrfToken: req.csrfToken() });
 
+/*
+create a new task document then save it
+*/
 const createTask = (req, res) => {
   if (!req.body.name) {
     return res.status(400).json({ error: 'Task name is required.' });
@@ -44,6 +47,9 @@ const createTask = (req, res) => {
   return taskPromise;
 };
 
+/*
+get all tasks by some account id then return them
+*/
 const getTasks = (request, response) => {
   const req = request;
   const res = response;
@@ -60,6 +66,9 @@ const getTasks = (request, response) => {
     });
 };
 
+/*
+when deleting a task, find the task by id, delete it
+*/
 const deleteTask = (request, response) => {
   const req = request;
   const res = response;
@@ -76,6 +85,11 @@ const deleteTask = (request, response) => {
     });
 };
 
+/*
+when updating a task, find the task by id,
+then update the variables of the document,
+then resave
+*/
 const updateTask = (request, response) => {
   const req = request;
   const res = response;

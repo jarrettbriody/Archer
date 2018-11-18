@@ -1,3 +1,4 @@
+//check for valid login values, send post
 const handleLogin = (e) => {
     e.preventDefault();
     $("#taskMessage").animate({width:'hide'},350);
@@ -10,6 +11,7 @@ const handleLogin = (e) => {
     return false;
 };
 
+//check for valid signup values, send post
 const handleSignup = (e) => {
     e.preventDefault();
     $("#taskMessage").animate({width:'hide'},350);
@@ -25,6 +27,7 @@ const handleSignup = (e) => {
     return false;
 };
 
+//create react page for login
 const LoginWindow = (props) => {
     return (
         <form id="loginForm" name="loginForm"
@@ -51,6 +54,7 @@ const LoginWindow = (props) => {
     );
 };
 
+//create react page for signup
 const SignupWindow = (props) => {
     return (
         <form id="signupForm" name="signupForm"
@@ -76,6 +80,7 @@ const SignupWindow = (props) => {
     );
 };
 
+//helper function for creating react pages
 const createLoginWindow = (csrf) => {
     ReactDOM.render(
         <LoginWindow csrf={csrf} />,

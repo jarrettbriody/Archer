@@ -36,6 +36,7 @@ AccountSchema.statics.toAPI = doc => ({
   _id: doc._id,
 });
 
+//check if a password is valid
 const validatePassword = (doc, password, callback) => {
   const pass = doc.password;
 
@@ -55,6 +56,7 @@ AccountSchema.statics.findByUsername = (name, callback) => {
   return AccountModel.findOne(search, callback);
 };
 
+//create a hash for a password string
 AccountSchema.statics.generateHash = (password, callback) => {
   const salt = crypto.randomBytes(saltLength);
 
@@ -63,6 +65,7 @@ AccountSchema.statics.generateHash = (password, callback) => {
   );
 };
 
+//authenticate the requested account
 AccountSchema.statics.authenticate = (username, password, callback) =>
 AccountModel.findByUsername(username, (err, doc) => {
   if (err) {
