@@ -10,10 +10,11 @@ const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const url = require('url');
 const csrf = require('csurf');
+const rateLimit = require('express-rate-limit');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
-const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/jab1089Archer';
+const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/jab1089HumanTaskManager';
 
 mongoose.connect(dbURL, (err) => {
   if (err) {
@@ -39,6 +40,7 @@ const router = require('./router.js');
 const app = express();
 app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
 app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
+app.enable('trust proxy');
 app.disable('x-powered-by');
 app.use(compression());
 app.use(bodyParser.urlencoded({
@@ -72,7 +74,20 @@ app.use((err, req, res, next) => {
   return false;
 });
 
+const apiLimiter = rateLimit({
+  windowMs: 15 * 1000,
+  max: 1,
+  message: { error: 'You have exceeded the rate limit. Try again in 15 seconds.' },
+});
+app.use('/signup', apiLimiter);
+app.use('/changePassword', apiLimiter);
+
 router(app);
+
+app.use((req, res) => {
+  res.status(404);
+  return res.render('404');
+});
 
 app.listen(port, (err) => {
   if (err) throw err;

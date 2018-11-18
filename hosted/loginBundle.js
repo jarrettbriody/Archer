@@ -2,7 +2,7 @@
 
 var handleLogin = function handleLogin(e) {
     e.preventDefault();
-    $("#domoMessage").animate({ width: 'hide' }, 350);
+    $("#taskMessage").animate({ width: 'hide' }, 350);
     if ($("#user").val() == '' || $("pass").val() == '') {
         handleError("Both username and password fields are required.");
         return false;
@@ -14,7 +14,7 @@ var handleLogin = function handleLogin(e) {
 
 var handleSignup = function handleSignup(e) {
     e.preventDefault();
-    $("#domoMessage").animate({ width: 'hide' }, 350);
+    $("#taskMessage").animate({ width: 'hide' }, 350);
     if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
         handleError("All fields are required.");
         return false;
@@ -37,17 +37,39 @@ var LoginWindow = function LoginWindow(props) {
             className: "mainForm"
         },
         React.createElement(
-            "label",
-            { htmlFor: "username" },
-            "Username: "
+            "h1",
+            { className: "appTitle" },
+            "Human Task Manager"
         ),
-        React.createElement("input", { id: "user", type: "text", name: "username", placeholder: "username" }),
         React.createElement(
-            "label",
-            { htmlFor: "pass" },
-            "Password: "
+            "h3",
+            { className: "signInTitle" },
+            "Login"
         ),
-        React.createElement("input", { id: "pass", type: "password", name: "pass", placeholder: "password" }),
+        React.createElement(
+            "div",
+            { id: "loginFormInput" },
+            React.createElement(
+                "div",
+                { id: "userContainer" },
+                React.createElement(
+                    "h5",
+                    null,
+                    "Username:"
+                ),
+                React.createElement("input", { id: "user", type: "text", name: "username", placeholder: "username" })
+            ),
+            React.createElement(
+                "div",
+                { id: "passContainer" },
+                React.createElement(
+                    "h5",
+                    null,
+                    "Password:"
+                ),
+                React.createElement("input", { id: "pass", type: "password", name: "pass", placeholder: "password" })
+            )
+        ),
         React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
         React.createElement("input", { className: "formSubmit", type: "submit", value: "Sign in" })
     );
@@ -63,25 +85,39 @@ var SignupWindow = function SignupWindow(props) {
             className: "mainForm"
         },
         React.createElement(
-            "label",
-            { htmlFor: "username" },
-            "Username: "
+            "h1",
+            { className: "appTitle" },
+            "Human Task Manager"
         ),
-        React.createElement("input", { id: "user", type: "text", name: "username", placeholder: "username" }),
         React.createElement(
-            "label",
-            { htmlFor: "pass" },
-            "Password: "
+            "h3",
+            { className: "signInTitle" },
+            "Sign up"
         ),
-        React.createElement("input", { id: "pass", type: "password", name: "pass", placeholder: "password" }),
         React.createElement(
-            "label",
-            { htmlFor: "pass2" },
-            "Password: "
+            "div",
+            { id: "signupFormInput" },
+            React.createElement(
+                "h5",
+                null,
+                "Username:"
+            ),
+            React.createElement("input", { id: "user", type: "text", name: "username", placeholder: "username" }),
+            React.createElement(
+                "h5",
+                null,
+                "Password:"
+            ),
+            React.createElement("input", { id: "pass", type: "password", name: "pass", placeholder: "password" }),
+            React.createElement(
+                "h5",
+                null,
+                "Confirm Password:"
+            ),
+            React.createElement("input", { id: "pass2", type: "password", name: "pass2", placeholder: "confirm password" })
         ),
-        React.createElement("input", { id: "pass2", type: "password", name: "pass2", placeholder: "retype password" }),
         React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
-        React.createElement("input", { className: "formSubmit", type: "submit", value: "Sign Up" })
+        React.createElement("input", { className: "formSubmit", type: "submit", value: "Sign up" })
     );
 };
 
@@ -125,16 +161,16 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
     $("#errorMessage").text(message);
-    $("#domoMessage").animate({ width: 'toggle' }, 350);
+    $("#taskMessage").animate({ width: 'toggle' }, 350);
 };
 
 var redirect = function redirect(response) {
-    $("#domoMessage").animate({ width: 'hide' }, 350);
+    $("#taskMessage").animate({ width: 'hide' }, 350);
     window.location = response.redirect;
 };
 
 var sendAjax = function sendAjax(type, action, data, success) {
-    console.dir(action + " " + data);
+    //console.dir(action + " " + data);
     $.ajax({
         cache: false,
         type: type,

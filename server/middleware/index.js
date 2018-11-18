@@ -7,7 +7,7 @@ const requiresLogin = (req, res, next) => {
 
 const requiresLogout = (req, res, next) => {
   if (req.session.account) {
-    return res.redirect('/characterCreator');
+    return res.redirect('/tasks');
   }
   return next();
 };

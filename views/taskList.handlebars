@@ -11,16 +11,20 @@
   <link rel="shortcut icon" href="/assets/img/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
-<body> 
+<body>
   <nav><a href="/login"><img id="logo" src="/assets/img/eyes.png" alt="eyes logo" title="Home" /></a>
-    <div class="navlink"><a id="loginButton" href="/login">Login</a></div>
-    <div class="navlink"><a id="signupButton" href="/signup">Sign up</a></div>
+    <div class="navlink"><a href="/logout">Log out</a></div>
+    <div class="navlink"><a id="changePasswordButton" href="/changePassword">Change Password</a></div>
     <div id="titleContainer"><h1 className="appTitle">Human Task Manager</h1></div>
+    <div class="navlink" id="createNewTask"><a href="/createTask" id="newLink"><img id="newButtonImg" src="/assets/img/plus.png" alt="New Task" title="Create a new task" /></a></div>
+    <div class="navlink" id="backButton"><a href="/tasks" id="backLink"><img id="backButtonImg" src="/assets/img/back.png" alt="Back" title="Back to task list menu" /></a></div>
   </nav>
-  <section id="content"></section>
+  <section class="hiddenCSRF"></section>
+  <section id="tasks" class="list">
+  </section>
   <div id="taskMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
-    <h3><span id="errorMessage">Incorrect username or password.</span></h3><img id="task" src="assets/img/paperclip.png" alt="task"/>
+    <h3><span id="errorMessage"></span></h3><img id="task" src="assets/img/paperclip.png" alt="task"/>
   </div>
-  <script src="/assets/loginBundle.js"></script>
+  <script src="/assets/bundle.js"></script>
 </body>
 </html>

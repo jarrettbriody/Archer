@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Archer</title>
+  <title>Human Task Manager</title>
   <script crossorigin src="https://unpkg.com/react@15/dist/react.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
   <script crossorigin src="https://unpkg.com/prop-types/prop-types.min.js"></script>
@@ -12,19 +12,13 @@
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
-  <nav><a href="/login"><img id="logo" src="/assets/img/face.png" alt="face logo"/></a>
-    <div class="navlink"><a href="/logout">Log out</a></div>
+  <nav><a href="/login"><img id="logo" src="/assets/img/eyes.png" alt="eyes logo" title="Home" /></a>
+    <div id="titleContainer"><h1 className="appTitle">Human Task Manager</h1></div>
   </nav>
-  <section id="makeDomo">
+  <section class="list">
+    <h2 id="err404">
+      404: The page you have requested could not be found.
+    </h2>
   </section>
-  <section id="deleteDomo">
-  </section>
-  <h2 id="charSelectTitle">Select your character</h2>
-  <section id="domos">
-  </section>
-  <div id="domoMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
-    <h3><span id="errorMessage"></span></h3><img id="domo" src="assets/img/domo.png" alt="domo"/>
-  </div>
-  <script src="/assets/bundle.js"></script>
 </body>
 </html>

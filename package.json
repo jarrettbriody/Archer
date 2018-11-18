@@ -16,8 +16,7 @@
     "buildAppBundle": "babel ./client/app ./client/helper --presets react --out-file ./hosted/bundle.js",
     "build": "npm run buildLoginBundle && npm run buildAppBundle",
     "watchLoginBundle": "babel --watch ./client/login ./client/helper --presets react --out-file ./hosted/loginBundle.js",
-    "watchAppBundle": "babel --watch ./client/app ./client/helper --presets react --out-file ./hosted/bundle.js",
-    "watchGameBundle": "babel --watch ./client/game ./client/helper --presets react --out-file ./hosted/gameBundle.js"
+    "watchAppBundle": "babel --watch ./client/app ./client/helper --presets react --out-file ./hosted/bundle.js"
   },
   "keywords": [
     "Node",
@@ -35,6 +34,7 @@
     "csurf": "^1.8.3",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
+    "express-rate-limit": "^3.3.2",
     "express-session": "^1.13.0",
     "helmet": "^1.3.0",
     "mongoose": "^4.4.6",

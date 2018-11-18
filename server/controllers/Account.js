@@ -28,7 +28,7 @@ const login = (request, response) => {
 
     req.session.account = Account.AccountModel.toAPI(account);
 
-    return res.json({ redirect: '/characterCreator' });
+    return res.json({ redirect: '/tasks' });
   });
 };
 
@@ -59,7 +59,7 @@ const signup = (request, response) => {
 
     savePromise.then(() => {
       req.session.account = Account.AccountModel.toAPI(newAccount);
-      return res.json({ redirect: '/characterCreator' });
+      return res.json({ redirect: '/tasks' });
     });
 
     savePromise.catch((err) => {
@@ -70,6 +70,56 @@ const signup = (request, response) => {
       return res.status(400).json({ error: 'An error occurred.' });
     });
   });
+};
+
+const changePassword = (request, response) => {
+  const req = request;
+  const res = response;
+
+  req.body.oldPass = `${req.body.oldPass}`;
+  req.body.pass = `${req.body.pass}`;
+  req.body.pass2 = `${req.body.pass2}`;
+
+  if (!req.body.oldPass || !req.body.pass || !req.body.pass2) {
+    return res.status(400).json({ error: 'All fields are required.' });
+  }
+  if (req.body.pass !== req.body.pass2) {
+    return res.status(400).json({ error: 'Passwords do not match.' });
+  }
+  return Account.AccountModel.authenticate(
+    req.session.account.username,
+    req.body.oldPass,
+    (err, account) => {
+      if (err || !account) {
+        return res.status(401).json({ error: 'Incorrect password.' });
+      }
+      return Account.AccountModel.generateHash(
+      req.body.pass,
+      (salt, hash) => Account.AccountModel.findByUsername(
+        req.session.account.username,
+        (err2, doc) => {
+          if (err2) {
+            console.log(err2);
+            return res.status(400).json({ error: 'An error occurred' });
+          }
+
+          const updatedDoc = doc;
+
+          updatedDoc.salt = salt;
+          updatedDoc.password = hash;
+
+          const savePromise = updatedDoc.save();
+
+          savePromise.then(() => res.json({ redirect: '/tasks' }));
+
+          savePromise.catch((err3) => {
+            console.log(err3);
+            return res.status(400).json({ error: 'An error occurred.' });
+          });
+
+          return savePromise;
+        }));
+    });
 };
 
 const getToken = (request, response) => {
@@ -87,4 +137,5 @@ module.exports.loginPage = loginPage;
 module.exports.login = login;
 module.exports.logout = logout;
 module.exports.signup = signup;
+module.exports.changePassword = changePassword;
 module.exports.getToken = getToken;

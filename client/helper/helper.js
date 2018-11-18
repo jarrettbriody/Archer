@@ -1,15 +1,15 @@
 const handleError = (message) => {
     $("#errorMessage").text(message);
-    $("#domoMessage").animate({width:'toggle'},350);
+    $("#taskMessage").animate({width:'toggle'},350);
 };
 
 const redirect = (response) => {
-    $("#domoMessage").animate({width:'hide'},350);
+    $("#taskMessage").animate({width:'hide'},350);
     window.location = response.redirect;
 };
 
 const sendAjax = (type,action,data,success) => {
-    console.dir(action + " " + data);
+    //console.dir(action + " " + data);
     $.ajax({
         cache:false,
         type:type,

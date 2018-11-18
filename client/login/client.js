@@ -1,6 +1,6 @@
 const handleLogin = (e) => {
     e.preventDefault();
-    $("#domoMessage").animate({width:'hide'},350);
+    $("#taskMessage").animate({width:'hide'},350);
     if($("#user").val() == '' || $("pass").val() == ''){
         handleError("Both username and password fields are required.");
         return false;
@@ -12,7 +12,7 @@ const handleLogin = (e) => {
 
 const handleSignup = (e) => {
     e.preventDefault();
-    $("#domoMessage").animate({width:'hide'},350);
+    $("#taskMessage").animate({width:'hide'},350);
     if($("#user").val()=='' || $("#pass").val()=='' || $("#pass2").val()==''){
         handleError("All fields are required.");
         return false;
@@ -33,10 +33,18 @@ const LoginWindow = (props) => {
             method="POST"
             className="mainForm"
         >
-            <label htmlFor="username">Username: </label>
-            <input id="user" type="text" name="username" placeholder="username" />
-            <label htmlFor="pass">Password: </label>
-            <input id="pass" type="password" name="pass" placeholder="password" />
+            <h1 className="appTitle">Human Task Manager</h1>
+            <h3 className="signInTitle">Login</h3>
+            <div id="loginFormInput">
+                <div id="userContainer">
+                    <h5>Username:</h5>
+                    <input id="user" type="text" name="username" placeholder="username" />
+                </div>
+                <div id="passContainer">
+                    <h5>Password:</h5>
+                    <input id="pass" type="password" name="pass" placeholder="password" />
+                </div>
+            </div>
             <input type="hidden" name="_csrf" value={props.csrf} />
             <input className="formSubmit" type="submit" value="Sign in" />
         </form>
@@ -51,14 +59,19 @@ const SignupWindow = (props) => {
             method="POST"
             className="mainForm"
         >
-            <label htmlFor="username">Username: </label>
-            <input id="user" type="text" name="username" placeholder="username" />
-            <label htmlFor="pass">Password: </label>
-            <input id="pass" type="password" name="pass" placeholder="password" />
-            <label htmlFor="pass2">Password: </label>
-            <input id="pass2" type="password" name="pass2" placeholder="retype password" />
+            <h1 className="appTitle">Human Task Manager</h1>
+            <h3 className="signInTitle">Sign up</h3>
+            
+            <div id="signupFormInput">
+                <h5>Username:</h5>
+                <input id="user" type="text" name="username" placeholder="username" />
+                <h5>Password:</h5>
+                <input id="pass" type="password" name="pass" placeholder="password" />
+                <h5>Confirm Password:</h5>
+                <input id="pass2" type="password" name="pass2" placeholder="confirm password" />
+            </div>
             <input type="hidden" name="_csrf" value={props.csrf} />
-            <input className="formSubmit" type="submit" value="Sign Up" />
+            <input className="formSubmit" type="submit" value="Sign up" />
         </form>
     );
 };
